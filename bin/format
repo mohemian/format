@@ -39,14 +39,14 @@ initializeArrays() {
         valueExtension[i]=${line#*= }
         ((i++))
     fi
-    done <"$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/conf/extension.cfg
+    done <"$( dirname $( greadlink -f ${BASH_SOURCE[0]} ) )"/conf/extension.cfg
 
     local i=0
     while read line; do
         nameHash[i]=${line%% =*}
         valueHash[i]=${line#*= }
         ((i++))
-    done <"$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/conf/hashBang.cfg
+    done <"$( dirname $( greadlink -f ${BASH_SOURCE[0]} ) )"/conf/hashBang.cfg
 }
 
 # A two argument method that takes a file and creates a backup file
@@ -163,7 +163,7 @@ gitFormat() {
 }
 
 # location of this bash script
-SCRIPT_LOCATION=$( echo "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )")
+SCRIPT_LOCATION=$( echo "$( dirname $( greadlink -f ${BASH_SOURCE[0]} ) )")
 
 # Flags for the options
 BACKUP=0
